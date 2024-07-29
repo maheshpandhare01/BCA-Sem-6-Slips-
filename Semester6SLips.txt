@@ -1,0 +1,2704 @@
+ Slip 2) A) Write a JSP program to check whether given number is Perfect or not. (Use Include
+
+directive). 
+
+checkPerfect.jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+
+    pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Check Perfect Number</title>
+
+</head>
+
+<body>
+
+    <h2>Check Perfect Number</h2>
+
+    <form action="checkPerfectResult.jsp" method="post">
+
+        Enter a number: <input type="text" name="number">
+
+        <input type="submit" value="Check">
+
+    </form>
+
+
+
+    <%@ include file="checkPerfectLogic.jsp" %>
+
+</body>
+
+</html>
+
+
+
+checkPerfectLogic.jsp
+
+<%
+
+// Get the number from the form
+
+int number = Integer.parseInt(request.getParameter("number"));
+
+
+
+// Calculate the sum of proper divisors
+
+int sum = 0;
+
+for(int i = 1; i < number; i++) {
+
+    if(number % i == 0) {
+
+        sum += i;
+
+    }
+
+}
+
+
+
+// Check if the sum equals the number
+
+if(sum == number) {
+
+%>
+
+    <p><%= number %> is a perfect number.</p>
+
+<%
+
+} else {
+
+%>
+
+    <p><%= number %> is not a perfect number.</p>
+
+<%
+
+}
+
+%>
+
+
+
+B) Write a java program in multithreading using applet for drawing flag.
+
+import java.applet.Applet;
+
+import java.awt.*;
+
+
+
+public class FlagDrawingApplet extends Applet {
+
+    public void init() {
+
+        setBackground(Color.white);
+
+    }
+
+
+
+    public void paint(Graphics g) {
+
+        // Draw flag components using multiple threads
+
+        Thread redThread = new Thread(new FlagComponent(g, Color.red, 50, 50, 200, 100));
+
+        Thread whiteThread = new Thread(new FlagComponent(g, Color.white, 50, 150, 200, 100));
+
+        Thread blueThread = new Thread(new FlagComponent(g, Color.blue, 50, 250, 200, 100));
+
+
+
+        redThread.start();
+
+        whiteThread.start();
+
+        blueThread.start();
+
+    }
+
+}
+
+
+
+class FlagComponent implements Runnable {
+
+    private Graphics g;
+
+    private Color color;
+
+    private int x, y, width, height;
+
+
+
+    public FlagComponent(Graphics g, Color color, int x, int y, int width, int height) {
+
+        this.g = g;
+
+        this.color = color;
+
+        this.x = x;
+
+        this.y = y;
+
+        this.width = width;
+
+        this.height = height;
+
+    }
+
+
+
+    @Override
+
+    public void run() {
+
+        g.setColor(color);
+
+        g.fillRect(x, y, width, height);
+
+    }
+
+}
+
+//Run it using appletviewer class.
+
+
+
+/*** Dot Net ***/
+
+Slip 2) A) Write a Vb.Net program to move the Text “Pune University” continuously from Left
+
+to Right and Vice Versa.
+
+
+
+Public Class Form1
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+
+        Static direction As Integer = 1 ' 1 for moving right, -1 for moving left
+
+        Dim newX As Integer = Label1.Location.X + direction * 5 ' Adjust the speed by changing the value
+
+
+
+        If newX + Label1.Width > Me.ClientSize.Width Then
+
+            direction = -1 ' Change direction when reaching right edge
+
+        ElseIf newX < 0 Then
+
+            direction = 1 ' Change direction when reaching left edge
+
+        End If
+
+
+
+        Label1.Location = New Point(newX, Label1.Location.Y)
+
+    End Sub
+
+End Class
+
+
+
+B) Write a C#.Net program to create a base class Department and derived classes Sales and
+
+Human Resource. Accept the details of both departments and display them in proper
+
+format.
+
+using System;
+
+
+
+class Department
+
+{
+
+    public string Name { get; set; }
+
+    public string Location { get; set; }
+
+
+
+    public virtual void DisplayDetails()
+
+    {
+
+        Console.WriteLine("Department Name: " + Name);
+
+        Console.WriteLine("Location: " + Location);
+
+    }
+
+}
+
+
+
+class Sales : Department
+
+{
+
+    public int SalesCount { get; set; }
+
+
+
+    public override void DisplayDetails()
+
+    {
+
+        base.DisplayDetails();
+
+        Console.WriteLine("Sales Count: " + SalesCount);
+
+    }
+
+}
+
+
+
+class HumanResource : Department
+
+{
+
+    public int EmployeesCount { get; set; }
+
+
+
+    public override void DisplayDetails()
+
+    {
+
+        base.DisplayDetails();
+
+        Console.WriteLine("Employees Count: " + EmployeesCount);
+
+    }
+
+}
+
+
+
+class Program
+
+{
+
+    static void Main(string[] args)
+
+    {
+
+        // Create Sales department
+
+        Sales salesDept = new Sales();
+
+        salesDept.Name = "Sales Department";
+
+        salesDept.Location = "Floor 1, Building A";
+
+        salesDept.SalesCount = 100;
+
+
+
+        // Create Human Resource department
+
+        HumanResource hrDept = new HumanResource();
+
+        hrDept.Name = "Human Resource Department";
+
+        hrDept.Location = "Floor 2, Building B";
+
+        hrDept.EmployeesCount = 50;
+
+
+
+        // Display details of both departments
+
+        Console.WriteLine("Details of Sales Department:");
+
+        salesDept.DisplayDetails();
+
+        Console.WriteLine();
+
+
+
+        Console.WriteLine("Details of Human Resource Department:");
+
+        hrDept.DisplayDetails();
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+Slip 5: A) Write a JSP program to calculate sum of first and last digit of a given number.
+
+Display sum in Red Color with font size 18.
+
+sumoffirstandlastdigit.jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Sum of First and Last Digit</title>
+
+</head>
+
+<body>
+
+    <h2>Sum of First and Last Digit</h2>
+
+    
+
+    <%
+
+        // Get the number from the request parameter
+
+        int number = Integer.parseInt(request.getParameter("number"));
+
+        
+
+        // Calculate the sum of first and last digit
+
+        int firstDigit = number;
+
+        while (firstDigit >= 10) {
+
+            firstDigit /= 10;
+
+        }
+
+        
+
+        int lastDigit = number % 10;
+
+        int sum = firstDigit + lastDigit;
+
+    %>
+
+    
+
+    <p style="color: red; font-size: 18px;">
+
+        Sum of first and last digit of <%= number %> is <%= sum %>
+
+    </p>
+
+</body>
+
+</html>
+
+
+
+B) Write a java program in multithreading using applet for Traffic signal.
+
+mult.java
+
+import java.applet.*;
+
+import java.awt.*;
+
+
+
+public class TrafficSignal extends Applet implements Runnable {
+
+    private Thread thread;
+
+    private boolean running;
+
+    private int currentSignal; // 0 - Red, 1 - Yellow, 2 - Green
+
+    
+
+    public void init() {
+
+        setSize(200, 400);
+
+        setBackground(Color.white);
+
+        currentSignal = 0; // Initial signal is Red
+
+    }
+
+    
+
+    public void start() {
+
+        if (thread == null) {
+
+            thread = new Thread(this);
+
+            running = true;
+
+            thread.start();
+
+        }
+
+    }
+
+    
+
+    public void stop() {
+
+        if (thread != null) {
+
+            running = false;
+
+            thread = null;
+
+        }
+
+    }
+
+    
+
+    public void run() {
+
+        while (running) {
+
+            try {
+
+                Thread.sleep(3000); // Signal duration
+
+            } catch (InterruptedException e) {
+
+                e.printStackTrace();
+
+            }
+
+            changeSignal();
+
+            repaint();
+
+        }
+
+    }
+
+    
+
+    public void changeSignal() {
+
+        currentSignal = (currentSignal + 1) % 3; // Rotate between Red, Yellow, Green
+
+    }
+
+    
+
+    public void paint(Graphics g) {
+
+        g.setColor(Color.black);
+
+        g.fillRect(75, 50, 50, 150); // Pole
+
+        g.setColor(Color.red);
+
+        g.fillOval(85, 60, 30, 30); // Red Light
+
+        g.setColor(Color.yellow);
+
+        g.fillOval(85, 110, 30, 30); // Yellow Light
+
+        g.setColor(Color.green);
+
+        g.fillOval(85, 160, 30, 30); // Green Light
+
+        
+
+        // Change light color based on currentSignal
+
+        switch (currentSignal) {
+
+            case 0: // Red
+
+                g.setColor(Color.red);
+
+                g.fillOval(85, 60, 30, 30);
+
+                break;
+
+            case 1: // Yellow
+
+                g.setColor(Color.yellow);
+
+                g.fillOval(85, 110, 30, 30);
+
+                break;
+
+            case 2: // Green
+
+                g.setColor(Color.green);
+
+                g.fillOval(85, 160, 30, 30);
+
+                break;
+
+        }
+
+    }
+
+}
+
+
+
+Slip 5) A) Write a VB.NET program to accept a character from keyboard and check whether it
+
+is vowel or consonant. Also display the case of that character.
+
+Module Module1
+
+    Sub Main()
+
+        Dim ch As Char
+
+
+
+        Console.WriteLine("Enter a character:")
+
+        ch = Console.ReadLine()
+
+
+
+        If Char.IsLetter(ch) Then
+
+            Select Case ch.ToString().ToLower()
+
+                Case "a", "e", "i", "o", "u"
+
+                    Console.WriteLine(ch & " is a vowel.")
+
+                Case Else
+
+                    Console.WriteLine(ch & " is a consonant.")
+
+            End Select
+
+
+
+            If Char.IsUpper(ch) Then
+
+                Console.WriteLine(ch & " is in uppercase.")
+
+            ElseIf Char.IsLower(ch) Then
+
+                Console.WriteLine(ch & " is in lowercase.")
+
+            End If
+
+        Else
+
+            Console.WriteLine(ch & " is not a letter.")
+
+        End If
+
+
+
+        Console.ReadLine()
+
+    End Sub
+
+End Module
+
+
+
+B)Design a web application form in ASP.Net having loan amount, interest rate and
+
+duration fields. Calculate the simple interest and perform necessary validation i.e.
+
+Ensures data has been entered for each field. Checking for non-numeric value. Assume
+
+suitable web-form controls and perform necessary validation.
+
+
+
+LoanCalculator.aspx
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LoanCalculator.aspx.cs" Inherits="LoanCalculator" %>
+
+
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head runat="server">
+
+    <title>Loan Calculator</title>
+
+</head>
+
+<body>
+
+    <form id="form1" runat="server">
+
+        <div>
+
+            <h2>Loan Calculator</h2>
+
+            <p>
+
+                Loan Amount: <asp:TextBox ID="txtLoanAmount" runat="server"></asp:TextBox>
+
+                <asp:RequiredFieldValidator ID="rfvLoanAmount" runat="server" ControlToValidate="txtLoanAmount" ErrorMessage="* Required"></asp:RequiredFieldValidator>
+
+                <asp:RegularExpressionValidator ID="revLoanAmount" runat="server" ControlToValidate="txtLoanAmount" ErrorMessage="* Invalid" ValidationExpression="\d+"></asp:RegularExpressionValidator>
+
+            </p>
+
+            <p>
+
+                Interest Rate (%): <asp:TextBox ID="txtInterestRate" runat="server"></asp:TextBox>
+
+                <asp:RequiredFieldValidator ID="rfvInterestRate" runat="server" ControlToValidate="txtInterestRate" ErrorMessage="* Required"></asp:RequiredFieldValidator>
+
+                <asp:RegularExpressionValidator ID="revInterestRate" runat="server" ControlToValidate="txtInterestRate" ErrorMessage="* Invalid" ValidationExpression="\d+"></asp:RegularExpressionValidator>
+
+            </p>
+
+            <p>
+
+                Duration (Years): <asp:TextBox ID="txtDuration" runat="server"></asp:TextBox>
+
+                <asp:RequiredFieldValidator ID="rfvDuration" runat="server" ControlToValidate="txtDuration" ErrorMessage="* Required"></asp:RequiredFieldValidator>
+
+                <asp:RegularExpressionValidator ID="revDuration" runat="server" ControlToValidate="txtDuration" ErrorMessage="* Invalid" ValidationExpression="\d+"></asp:RegularExpressionValidator>
+
+            </p>
+
+            <p>
+
+                <asp:Button ID="btnCalculate" runat="server" Text="Calculate" OnClick="btnCalculate_Click" />
+
+            </p>
+
+            <p>
+
+                <asp:Label ID="lblResult" runat="server" Text=""></asp:Label>
+
+            </p>
+
+        </div>
+
+    </form>
+
+</body>
+
+</html>
+
+
+
+LoanCalculator.aspx.cs
+
+using System;
+
+
+
+public partial class LoanCalculator : System.Web.UI.Page
+
+{
+
+    protected void Page_Load(object sender, EventArgs e)
+
+    {
+
+    }
+
+
+
+    protected void btnCalculate_Click(object sender, EventArgs e)
+
+    {
+
+        if (IsValid)
+
+        {
+
+            try
+
+            {
+
+                double loanAmount = double.Parse(txtLoanAmount.Text);
+
+                double interestRate = double.Parse(txtInterestRate.Text);
+
+                double duration = double.Parse(txtDuration.Text);
+
+
+
+                double simpleInterest = (loanAmount * interestRate * duration) / 100;
+
+
+
+                lblResult.Text = string.Format("Simple Interest: {0:C}", simpleInterest);
+
+            }
+
+            catch (Exception ex)
+
+            {
+
+                lblResult.Text = "Error: " + ex.Message;
+
+            }
+
+        }
+
+    }
+
+}
+
+
+
+
+
+
+
+Slip 7 A) Write a JSP script to validate given E-Mail ID
+
+<%@ page session="true" %>
+
+
+
+<html>
+
+<head>
+
+<title>Email Validation</title>
+
+</head>
+
+<body>
+
+
+
+<h1>Email Validation</h1>
+
+
+
+<%
+
+  String email = request.getParameter("email"); // Get email from form submission
+
+  boolean isValid = false;
+
+  if (email != null) {
+
+    // Basic email format regex (can be improved)
+
+    String regex = "^[\\w.+_-]+@[\\w.-]+\\.[a-zA-Z]{2,4}$";
+
+    isValid = email.matches(regex);
+
+  }
+
+  if (isValid) {
+
+    out.print("Valid email address.");
+
+  } else {
+
+    out.print("Invalid email address. Please enter a valid email.");
+
+  }
+
+%>
+
+<br><br>
+
+<form action="your_jsp_file.jsp" method="post">
+
+  <label for="email">Enter your email:</label>
+
+  <input type="text" id="email" name="email" required>
+
+  <br><br>
+
+  <button type="submit">Submit</button>
+
+</form>
+
+</body>
+
+</html>
+
+
+
+B)Write a Multithreading program in java to display the number’s between 1 to 100
+
+continuously in a TextField by clicking on button. (use Runnable Interface)
+
+import javax.swing.*;
+
+import java.awt.*;
+
+import java.awt.event.*;
+
+
+
+public class NumberDisplay extends JFrame {
+
+    private JTextField textField;
+
+    private JButton startButton;
+
+    private volatile boolean running;
+
+
+
+    public NumberDisplay() {
+
+        setTitle("Number Display");
+
+        setSize(300, 100);
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        setLayout(new FlowLayout());
+
+
+
+        textField = new JTextField(10);
+
+        textField.setEditable(false);
+
+        add(textField);
+
+
+
+        startButton = new JButton("Start");
+
+        startButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+
+                if (!running) {
+
+                    running = true;
+
+                    startButton.setText("Stop");
+
+                    new Thread(new NumberRunnable()).start();
+
+                } else {
+
+                    running = false;
+
+                    startButton.setText("Start");
+
+                }
+
+            }
+
+        });
+
+        add(startButton);
+
+
+
+        setVisible(true);
+
+    }
+
+
+
+    private class NumberRunnable implements Runnable {
+
+        public void run() {
+
+            for (int i = 1; i <= 100 && running; i++) {
+
+                textField.setText(Integer.toString(i));
+
+                try {
+
+                    Thread.sleep(1000); // 1 second delay
+
+                } catch (InterruptedException e) {
+
+                    e.printStackTrace();
+
+                }
+
+            }
+
+            running = false;
+
+            startButton.setText("Start");
+
+        }
+
+    }
+
+
+
+    public static void main(String[] args) {
+
+        new NumberDisplay();
+
+    }
+
+}
+
+
+
+Slip 7) A) Write a ASP.Net program to accept a number from the user in a textbox control and
+
+throw an exception if the number is not a perfect number. Assume suitable controls on
+
+the web form.
+
+PerfectNumberChecker.aspx
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PerfectNumberChecker.aspx.cs" Inherits="PerfectNumberChecker" %>
+
+
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head runat="server">
+
+    <title>Perfect Number Checker</title>
+
+</head>
+
+<body>
+
+    <form id="form1" runat="server">
+
+        <div>
+
+            <h2>Perfect Number Checker</h2>
+
+            <p>
+
+                Enter a Number: <asp:TextBox ID="txtNumber" runat="server"></asp:TextBox>
+
+                <asp:RequiredFieldValidator ID="rfvNumber" runat="server" ControlToValidate="txtNumber" ErrorMessage="* Required"></asp:RequiredFieldValidator>
+
+                <asp:RegularExpressionValidator ID="revNumber" runat="server" ControlToValidate="txtNumber" ErrorMessage="* Invalid" ValidationExpression="\d+"></asp:RegularExpressionValidator>
+
+            </p>
+
+            <p>
+
+                <asp:Button ID="btnCheck" runat="server" Text="Check" OnClick="btnCheck_Click" />
+
+            </p>
+
+            <p>
+
+                <asp:Label ID="lblResult" runat="server" Text=""></asp:Label>
+
+            </p>
+
+        </div>
+
+    </form>
+
+</body>
+
+</html>
+
+
+
+PerfectNumberChecker.aspx.cs
+
+using System;
+
+
+
+public partial class PerfectNumberChecker : System.Web.UI.Page
+
+{
+
+    protected void Page_Load(object sender, EventArgs e)
+
+    {
+
+    }
+
+
+
+    protected void btnCheck_Click(object sender, EventArgs e)
+
+    {
+
+        if (IsValid)
+
+        {
+
+            try
+
+            {
+
+                int number = int.Parse(txtNumber.Text);
+
+                if (IsPerfectNumber(number))
+
+                {
+
+                    lblResult.Text = number + " is a perfect number.";
+
+                }
+
+                else
+
+                {
+
+                    throw new Exception(number + " is not a perfect number.");
+
+                }
+
+            }
+
+            catch (Exception ex)
+
+            {
+
+                lblResult.Text = "Error: " + ex.Message;
+
+            }
+
+        }
+
+    }
+
+
+
+    private bool IsPerfectNumber(int number)
+
+    {
+
+        int sum = 0;
+
+        for (int i = 1; i < number; i++)
+
+        {
+
+            if (number % i == 0)
+
+            {
+
+                sum += i;
+
+            }
+
+        }
+
+        return sum == number;
+
+    }
+
+}
+
+
+
+B)  Write a VB.NET program to create a table student (Roll No, SName, Class,City).
+
+Insert the records (Max: 5). Update city of students to ‘Pune’ whose city is ‘Mumbai’
+
+and display updated records in GridView
+
+Form1.vb
+
+Imports System.Data.SqlClient
+
+Public Class Form1
+
+    Dim connectionString As String = "Data Source=YourServer;Initial Catalog=YourDatabase;Integrated Security=True"
+
+    Dim connection As New SqlConnection(connectionString)
+
+
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        ' Create table student if not exists
+
+        Dim createTableQuery As String = "IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'student') AND type in (N'U')) " &
+
+                                         "CREATE TABLE student (RollNo INT PRIMARY KEY, SName VARCHAR(50), Class VARCHAR(10), City VARCHAR(50))"
+
+        ExecuteQuery(createTableQuery)
+
+
+
+        ' Insert records into student table
+
+        Dim insertQuery As String = "INSERT INTO student (RollNo, SName, Class, City) VALUES (@RollNo, @SName, @Class, @City)"
+
+        Dim students As New List(Of Student) From {
+
+            New Student(1, "John", "10th", "Mumbai"),
+
+            New Student(2, "Alice", "11th", "Pune"),
+
+            New Student(3, "Bob", "12th", "Mumbai"),
+
+            New Student(4, "Emma", "10th", "Pune"),
+
+            New Student(5, "David", "11th", "Mumbai")
+
+        }
+
+
+
+        For Each student In students
+
+            ExecuteQuery(insertQuery, New SqlParameter("@RollNo", student.RollNo),
+
+                                     New SqlParameter("@SName", student.SName),
+
+                                     New SqlParameter("@Class", student.Class),
+
+                                     New SqlParameter("@City", student.City))
+
+        Next
+
+
+
+        ' Update city of students from 'Mumbai' to 'Pune'
+
+        Dim updateQuery As String = "UPDATE student SET City = 'Pune' WHERE City = 'Mumbai'"
+
+        ExecuteQuery(updateQuery)
+
+
+
+        ' Display updated records in GridView
+
+        Dim selectQuery As String = "SELECT * FROM student"
+
+        Dim adapter As New SqlDataAdapter(selectQuery, connection)
+
+        Dim table As New DataTable()
+
+        adapter.Fill(table)
+
+
+
+        GridView1.DataSource = table
+
+        GridView1.DataBind()
+
+    End Sub
+
+
+
+    Private Sub ExecuteQuery(query As String, ParamArray parameters As SqlParameter())
+
+        connection.Open()
+
+        Using cmd As New SqlCommand(query, connection)
+
+            cmd.Parameters.AddRange(parameters)
+
+            cmd.ExecuteNonQuery()
+
+        End Using
+
+        connection.Close()
+
+    End Sub
+
+End Class
+
+
+
+Public Class Student
+
+    Public Property RollNo As Integer
+
+    Public Property SName As String
+
+    Public Property Class As String
+
+    Public Property City As String
+
+
+
+    Public Sub New(rollNo As Integer, sName As String, class As String, city As String)
+
+        Me.RollNo = rollNo
+
+        Me.SName = sName
+
+        Me.Class = class
+
+        Me.City = city
+
+    End Sub
+
+End Class
+
+
+
+
+
+Slip 9 A) Write a Java Program to create a Emp (ENo, EName, Sal) table and insert record
+
+into it. (Use PreparedStatement Interface) 
+
+import java.sql.*;
+
+public class EmployeeDatabase {
+
+    public static void main(String[] args) {
+
+        try {
+
+            // Connect to MySQL database
+
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/your_database_name", "your_username", "your_password");
+
+            
+
+            // Create table Emp
+
+            Statement createStatement = connection.createStatement();
+
+            createStatement.executeUpdate("CREATE TABLE Emp (ENo INT AUTO_INCREMENT PRIMARY KEY, EName VARCHAR(50), Sal DECIMAL(10, 2))");
+
+            createStatement.close();
+
+            
+
+            // Insert record into Emp
+
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Emp (EName, Sal) VALUES (?, ?)");
+
+            preparedStatement.setString(1, "John Doe");
+
+            preparedStatement.setDouble(2, 50000.00);
+
+            preparedStatement.executeUpdate();
+
+            preparedStatement.close();
+
+            
+
+            // Close connection
+
+            connection.close();
+
+            
+
+            System.out.println("Record inserted successfully");
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+    }
+
+}
+
+
+
+B) Write a JSP program to create an online shopping mall. User must be allowed to do
+
+purchase from two pages. Each page should have a page total. The third page should
+
+display a bill, which consists of a page total of whatever the purchase has been done
+
+and print the total. (Use Session)
+
+firstpage.jsp
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%@ page import="java.io.*,java.util.*" %>
+
+<html>
+
+<head>
+
+    <title>Online Shopping Mall</title>
+
+</head>
+
+<body>
+
+    <h2>Page 1 - Item 1</h2>
+
+    <form action="secondpage.jsp" method="post">
+
+        Quantity: <input type="text" name="quantity1"><br>
+
+        <input type="submit" value="Next">
+
+    </form>
+
+</body>
+
+</html>
+
+
+
+secondpage.jsp
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%@ page import="java.io.*,java.util.*" %>
+
+<%
+
+    int quantity1 = Integer.parseInt(request.getParameter("quantity1"));
+
+    session.setAttribute("quantity1", quantity1);
+
+%>
+
+<html>
+
+<head>
+
+    <title>Online Shopping Mall</title>
+
+</head>
+
+<body>
+
+    <h2>Page 2 - Item 2</h2>
+
+    <form action="thirdpage.jsp" method="post">
+
+        Quantity: <input type="text" name="quantity2"><br>
+
+        <input type="submit" value="Next">
+
+    </form>
+
+</body>
+
+</html>
+
+
+
+thirdpage.jsp
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%@ page import="java.io.*,java.util.*" %>
+
+<%
+
+    int quantity1 = (Integer)session.getAttribute("quantity1");
+
+    int quantity2 = Integer.parseInt(request.getParameter("quantity2"));
+
+    int total = quantity1 + quantity2;
+
+    session.setAttribute("total", total);
+
+%>
+
+<html>
+
+<head>
+
+    <title>Online Shopping Mall</title>
+
+</head>
+
+<body>
+
+    <h2>Bill</h2>
+
+    <p>Page 1 Total: <%= quantity1 %></p>
+
+    <p>Page 2 Total: <%= quantity2 %></p>
+
+    <p>Total: <%= total %></p>
+
+</body>
+
+</html>
+
+
+
+Slip 9) A) Write a Menu driven program in C#.Net to perform following functionality:
+
+Addition, Multiplication, Subtraction, Division. 
+
+using System;
+
+
+
+class Program
+
+{
+
+    static void Main(string[] args)
+
+    {
+
+        while (true)
+
+        {
+
+            Console.WriteLine("Menu:");
+
+            Console.WriteLine("1. Addition");
+
+            Console.WriteLine("2. Subtraction");
+
+            Console.WriteLine("3. Multiplication");
+
+            Console.WriteLine("4. Division");
+
+            Console.WriteLine("5. Exit");
+
+            Console.WriteLine("Enter your choice:");
+
+
+
+            int choice;
+
+            if (!int.TryParse(Console.ReadLine(), out choice))
+
+            {
+
+                Console.WriteLine("Invalid input. Please enter a number.");
+
+                continue;
+
+            }
+
+
+
+            switch (choice)
+
+            {
+
+                case 1:
+
+                    Addition();
+
+                    break;
+
+                case 2:
+
+                    Subtraction();
+
+                    break;
+
+                case 3:
+
+                    Multiplication();
+
+                    break;
+
+                case 4:
+
+                    Division();
+
+                    break;
+
+                case 5:
+
+                    Environment.Exit(0);
+
+                    break;
+
+                default:
+
+                    Console.WriteLine("Invalid choice. Please select a number from 1 to 5.");
+
+                    break;
+
+            }
+
+        }
+
+    }
+
+
+
+    static void Addition()
+
+    {
+
+        double num1, num2;
+
+        Console.WriteLine("Enter first number:");
+
+        if (!double.TryParse(Console.ReadLine(), out num1))
+
+        {
+
+            Console.WriteLine("Invalid input. Please enter a number.");
+
+            return;
+
+        }
+
+        Console.WriteLine("Enter second number:");
+
+        if (!double.TryParse(Console.ReadLine(), out num2))
+
+        {
+
+            Console.WriteLine("Invalid input. Please enter a number.");
+
+            return;
+
+        }
+
+        Console.WriteLine("Result: " + (num1 + num2));
+
+    }
+
+
+
+    static void Subtraction()
+
+    {
+
+        double num1, num2;
+
+        Console.WriteLine("Enter first number:");
+
+        if (!double.TryParse(Console.ReadLine(), out num1))
+
+        {
+
+            Console.WriteLine("Invalid input. Please enter a number.");
+
+            return;
+
+        }
+
+        Console.WriteLine("Enter second number:");
+
+        if (!double.TryParse(Console.ReadLine(), out num2))
+
+        {
+
+            Console.WriteLine("Invalid input. Please enter a number.");
+
+            return;
+
+        }
+
+        Console.WriteLine("Result: " + (num1 - num2));
+
+    }
+
+
+
+    static void Multiplication()
+
+    {
+
+        double num1, num2;
+
+        Console.WriteLine("Enter first number:");
+
+        if (!double.TryParse(Console.ReadLine(), out num1))
+
+        {
+
+            Console.WriteLine("Invalid input. Please enter a number.");
+
+            return;
+
+        }
+
+        Console.WriteLine("Enter second number:");
+
+        if (!double.TryParse(Console.ReadLine(), out num2))
+
+        {
+
+            Console.WriteLine("Invalid input. Please enter a number.");
+
+            return;
+
+        }
+
+        Console.WriteLine("Result: " + (num1 * num2));
+
+    }
+
+
+
+    static void Division()
+
+    {
+
+        double num1, num2;
+
+        Console.WriteLine("Enter dividend:");
+
+        if (!double.TryParse(Console.ReadLine(), out num1))
+
+        {
+
+            Console.WriteLine("Invalid input. Please enter a number.");
+
+            return;
+
+        }
+
+        Console.WriteLine("Enter divisor:");
+
+        if (!double.TryParse(Console.ReadLine(), out num2) || num2 == 0)
+
+        {
+
+            Console.WriteLine("Invalid input or division by zero. Please enter a non-zero number.");
+
+            return;
+
+        }
+
+        Console.WriteLine("Result: " + (num1 / num2));
+
+    }
+
+}
+
+
+
+B) Create an application in ASP.Net that allows the user to enter a number in the
+
+textbox named "getnum". Check whether the number in the textbox "getnum" is
+
+palindrome or not. Print the message accordingly in the label control named lbldisplay
+
+when the user clicks on the button "check".
+
+PalindromeChecker.aspx
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PalindromeChecker.aspx.cs" Inherits="PalindromeChecker" %>
+
+
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head runat="server">
+
+    <title>Palindrome Checker</title>
+
+</head>
+
+<body>
+
+    <form id="form1" runat="server">
+
+        <div>
+
+            <h2>Palindrome Checker</h2>
+
+            <p>
+
+                Enter a Number: <asp:TextBox ID="getnum" runat="server"></asp:TextBox>
+
+            </p>
+
+            <p>
+
+                <asp:Button ID="check" runat="server" Text="Check" OnClick="check_Click" />
+
+            </p>
+
+            <p>
+
+                <asp:Label ID="lbldisplay" runat="server" Text=""></asp:Label>
+
+            </p>
+
+        </div>
+
+    </form>
+
+</body>
+
+</html>
+
+
+
+PalindromeChecker.aspx.cs
+
+using System;
+
+
+
+public partial class PalindromeChecker : System.Web.UI.Page
+
+{
+
+    protected void check_Click(object sender, EventArgs e)
+
+    {
+
+        string num = getnum.Text;
+
+        if (IsPalindrome(num))
+
+        {
+
+            lbldisplay.Text = num + " is a palindrome.";
+
+        }
+
+        else
+
+        {
+
+            lbldisplay.Text = num + " is not a palindrome.";
+
+        }
+
+    }
+
+
+
+    private bool IsPalindrome(string num)
+
+    {
+
+        int i = 0;
+
+        int j = num.Length - 1;
+
+
+
+        while (i < j)
+
+        {
+
+            if (num[i] != num[j])
+
+            {
+
+                return false;
+
+            }
+
+            i++;
+
+            j--;
+
+        }
+
+        return true;
+
+    }
+
+}
+
+
+
+
+
+
+
+Slip 13) A) Write a java program to display name of currently executing Thread in
+
+multithreading.
+
+public class ThreadNameDisplay {
+
+    public static void main(String[] args) {
+
+        Thread thread1 = new Thread(new MyRunnable(), "Thread 1");
+
+        Thread thread2 = new Thread(new MyRunnable(), "Thread 2");
+
+
+
+        thread1.start();
+
+        thread2.start();
+
+    }
+
+
+
+    static class MyRunnable implements Runnable {
+
+        public void run() {
+
+            System.out.println("Currently executing thread: " + Thread.currentThread().getName());
+
+        }
+
+    }
+
+}
+
+
+
+B) Write a JSP program to display the details of College (CollegeID, Coll_Name,
+
+Address) in tabular form on browser. 
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<html>
+
+<head>
+
+    <title>College Details</title>
+
+</head>
+
+<body>
+
+    <h2>College Details</h2>
+
+    <table border="1">
+
+        <tr>
+
+            <th>College ID</th>
+
+            <th>College Name</th>
+
+            <th>Address</th>
+
+        </tr>
+
+        <tr>
+
+            <td>1</td>
+
+            <td>ABC College</td>
+
+            <td>123 Main Street, City, Country</td>
+
+        </tr>
+
+        <tr>
+
+            <td>2</td>
+
+            <td>XYZ College</td>
+
+            <td>456 Oak Avenue, Town, Country</td>
+
+        </tr>
+
+        <%-- Add more rows as needed --%>
+
+    </table>
+
+</body>
+
+</html>
+
+
+
+Slip 13) A)Write a VB.net program for blinking an image.
+
+Public Class Form1
+
+    Dim isVisible As Boolean = True
+
+
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        ' Start the timer when the form loads
+
+        Timer1.Start()
+
+    End Sub
+
+
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+
+        ' Toggle the visibility of the image control
+
+        PictureBox1.Visible = isVisible
+
+        isVisible = Not isVisible
+
+    End Sub
+
+End Class
+
+
+
+B) Write a C# Program to accept and display ‘n’ student’s details such as Roll. No,
+
+Name, marks in three subjects, using class. Display percentage of each student.
+
+using System;
+
+
+
+class Student
+
+{
+
+    public int RollNo { get; set; }
+
+    public string Name { get; set; }
+
+    public double MarksSubject1 { get; set; }
+
+    public double MarksSubject2 { get; set; }
+
+    public double MarksSubject3 { get; set; }
+
+
+
+    public double CalculatePercentage()
+
+    {
+
+        return (MarksSubject1 + MarksSubject2 + MarksSubject3) / 3;
+
+    }
+
+}
+
+
+
+class Program
+
+{
+
+    static void Main(string[] args)
+
+    {
+
+        Console.WriteLine("Enter the number of students:");
+
+        int n = Convert.ToInt32(Console.ReadLine());
+
+
+
+        Student[] students = new Student[n];
+
+
+
+        for (int i = 0; i < n; i++)
+
+        {
+
+            Console.WriteLine($"\nEnter details for Student {i + 1}:");
+
+
+
+            students[i] = new Student();
+
+            students[i].RollNo = Convert.ToInt32(Console.ReadLine());
+
+            students[i].Name = Console.ReadLine();
+
+            students[i].MarksSubject1 = Convert.ToDouble(Console.ReadLine());
+
+            students[i].MarksSubject2 = Convert.ToDouble(Console.ReadLine());
+
+            students[i].MarksSubject3 = Convert.ToDouble(Console.ReadLine());
+
+        }
+
+
+
+        Console.WriteLine("\nStudent Details:");
+
+        foreach (var student in students)
+
+        {
+
+            Console.WriteLine($"\nRoll No: {student.RollNo}");
+
+            Console.WriteLine($"Name: {student.Name}");
+
+            Console.WriteLine($"Percentage: {student.CalculatePercentage():F2}%");
+
+        }
+
+    }
+
+}
+
+
+
+
+
+
+
+Slip 15) A) Write a java program to display each alphabet after 2 seconds between ‘a’ to ‘z’.
+
+public class AlphabetDisplay {
+
+    public static void main(String[] args) {
+
+        char currentChar = 'a';
+
+        
+
+        while (currentChar <= 'z') {
+
+            System.out.println(currentChar);
+
+            try {
+
+                Thread.sleep(2000); // 2 seconds delay
+
+            } catch (InterruptedException e) {}
+
+            currentChar++;
+
+        }
+
+    }
+
+}
+
+
+
+B) Write a Java program to accept the details of Student (RNo, SName, Per, Gender,
+
+Class) and store into the database. (Use appropriate Swing Components and
+
+PreparedStatement Interface).
+
+
+
+import javax.swing.*;
+
+import java.awt.*;
+
+import java.awt.event.*;
+
+import java.sql.*;
+
+
+
+public class StudentDetailsForm extends JFrame {
+
+    private JTextField rnoField, snameField, perField, genderField, classField;
+
+    private JButton saveButton;
+
+    private Connection connection;
+
+
+
+    public StudentDetailsForm() {
+
+        setTitle("Student Details Form");
+
+        setSize(400, 300);
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        setLayout(new GridLayout(6, 2));
+
+
+
+        JLabel rnoLabel = new JLabel("Roll Number:");
+
+        add(rnoLabel);
+
+        rnoField = new JTextField();
+
+        add(rnoField);
+
+
+
+        JLabel snameLabel = new JLabel("Student Name:");
+
+        add(snameLabel);
+
+        snameField = new JTextField();
+
+        add(snameField);
+
+
+
+        JLabel perLabel = new JLabel("Percentage:");
+
+        add(perLabel);
+
+        perField = new JTextField();
+
+        add(perField);
+
+
+
+        JLabel genderLabel = new JLabel("Gender:");
+
+        add(genderLabel);
+
+        genderField = new JTextField();
+
+        add(genderField);
+
+
+
+        JLabel classLabel = new JLabel("Class:");
+
+        add(classLabel);
+
+        classField = new JTextField();
+
+        add(classField);
+
+
+
+        saveButton = new JButton("Save");
+
+        saveButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+
+                saveStudentDetails();
+
+            }
+
+        });
+
+        add(saveButton);
+
+
+
+        setVisible(true);
+
+
+
+        connectToDatabase();
+
+    }
+
+
+
+    private void connectToDatabase() {
+
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver");
+
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/your_database_name", "your_username", "your_password");
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(this, "Failed to connect to the database: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
+            ex.printStackTrace();
+
+        }
+
+    }
+
+
+
+    private void saveStudentDetails() {
+
+        try {
+
+            String query = "INSERT INTO Students (RNo, SName, Per, Gender, Class) VALUES (?, ?, ?, ?, ?)";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setString(1, rnoField.getText());
+
+            preparedStatement.setString(2, snameField.getText());
+
+            preparedStatement.setString(3, perField.getText());
+
+            preparedStatement.setString(4, genderField.getText());
+
+            preparedStatement.setString(5, classField.getText());
+
+
+
+            preparedStatement.executeUpdate();
+
+            JOptionPane.showMessageDialog(this, "Student details saved successfully!");
+
+            
+
+            preparedStatement.close();
+
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(this, "Failed to save student details: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
+            ex.printStackTrace();
+
+        }
+
+    }
+
+
+
+    public static void main(String[] args) {
+
+        new StudentDetailsForm();
+
+    }
+
+}
+
+
+
+Slip 15 A)  Write ASP.Net application to create a user control that contains a list of colors. Add
+
+a button to the Web Form which when clicked changes the color of the form to the
+
+color selected from the list
+
+
+
+B) Write a C#.Net Program to accept and display ‘n’ customer’s details such as
+
+customer_no, Name, address ,itemno, quantity price . Display total price of all item.
+
+using System;
+
+using System.Collections.Generic;
+
+
+
+class Customer
+
+{
+
+    public int CustomerNo { get; set; }
+
+    public string Name { get; set; }
+
+    public string Address { get; set; }
+
+    public int ItemNo { get; set; }
+
+    public int Quantity { get; set; }
+
+    public double Price { get; set; }
+
+
+
+    public double CalculateTotalPrice()
+
+    {
+
+        return Quantity * Price;
+
+    }
+
+}
+
+
+
+class Program
+
+{
+
+    static void Main(string[] args)
+
+    {
+
+        Console.WriteLine("Enter the number of customers:");
+
+        int n = Convert.ToInt32(Console.ReadLine());
+
+
+
+        List<Customer> customers = new List<Customer>();
+
+
+
+        for (int i = 0; i < n; i++)
+
+        {
+
+            Console.WriteLine($"\nEnter details for Customer {i + 1}:");
+
+
+
+            Customer customer = new Customer();
+
+
+
+            Console.Write("Customer No: ");
+
+            customer.CustomerNo = Convert.ToInt32(Console.ReadLine());
+
+
+
+            Console.Write("Name: ");
+
+            customer.Name = Console.ReadLine();
+
+
+
+            Console.Write("Address: ");
+
+            customer.Address = Console.ReadLine();
+
+
+
+            Console.Write("Item No: ");
+
+            customer.ItemNo = Convert.ToInt32(Console.ReadLine());
+
+
+
+            Console.Write("Quantity: ");
+
+            customer.Quantity = Convert.ToInt32(Console.ReadLine());
+
+
+
+            Console.Write("Price: ");
+
+            customer.Price = Convert.ToDouble(Console.ReadLine());
+
+
+
+            customers.Add(customer);
+
+        }
+
+
+
+        double total = 0;
+
+        Console.WriteLine("\nCustomer Details:");
+
+        foreach (var customer in customers)
+
+        {
+
+            Console.WriteLine($"\nCustomer No: {customer.CustomerNo}");
+
+            Console.WriteLine($"Name: {customer.Name}");
+
+            Console.WriteLine($"Address: {customer.Address}");
+
+            Console.WriteLine($"Item No: {customer.ItemNo}");
+
+            Console.WriteLine($"Quantity: {customer.Quantity}");
+
+            Console.WriteLine($"Price: {customer.Price:C}");
+
+            Console.WriteLine($"Total Price: {customer.CalculateTotalPrice():C}");
+
+            total += customer.CalculateTotalPrice();
+
+        }
+
+        Console.WriteLine($"\nTotal Price of all items: {total:C}");
+
+    }
+
+}
+
+
+
+
+
+Slip 30) A)Write a JSP script to accept a String from a user and display it in reverse order.
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<html>
+
+<head>
+
+    <title>Reverse String</title>
+
+</head>
+
+<body>
+
+    <h2>Reverse String</h2>
+
+    <form action="reverse.jsp" method="post">
+
+        Enter a String: <input type="text" name="inputString"><br>
+
+        <input type="submit" value="Reverse">
+
+    </form>
+
+    
+
+    <%-- Reverse string logic --%>
+
+    <%
+
+        String inputString = request.getParameter("inputString");
+
+        
+
+        if (inputString != null && !inputString.isEmpty()) {
+
+            String reversedString = new StringBuilder(inputString).reverse().toString();
+
+    %>
+
+            <p>Reversed String: <%= reversedString %></p>
+
+    <%
+
+        }
+
+    %>
+
+</body>
+
+</html>
+
+
+
+B) Write a java program in multithreading using applet for moving car.
+
+import java.applet.*;
+
+import java.awt.*;
+
+
+
+public class MovingCar extends Applet implements Runnable {
+
+    private int x = 0;
+
+    private int y = 100;
+
+    private Thread thread;
+
+
+
+    public void init() {
+
+        setSize(400, 300);
+
+    }
+
+
+
+    public void start() {
+
+        if (thread == null) {
+
+            thread = new Thread(this);
+
+            thread.start();
+
+        }
+
+    }
+
+
+
+    public void stop() {
+
+        if (thread != null) {
+
+            thread.stop();
+
+            thread = null;
+
+        }
+
+    }
+
+
+
+    public void run() {
+
+        while (true) {
+
+            x += 5; // Move car horizontally
+
+            if (x > getWidth()) {
+
+                x = -50; // Reset car position when it goes out of bounds
+
+            }
+
+            repaint();
+
+            try {
+
+                Thread.sleep(100); // Adjust speed of car
+
+            } catch (InterruptedException e) {
+
+                e.printStackTrace();
+
+            }
+
+        }
+
+    }
+
+
+
+    public void paint(Graphics g) {
+
+        super.paint(g);
+
+        g.setColor(Color.red);
+
+        g.fillRect(x, y, 50, 30); // Car body
+
+        g.setColor(Color.blue);
+
+        g.fillOval(x + 10, y + 25, 10, 10); // Left wheel
+
+        g.fillOval(x + 30, y + 25, 10, 10); // Right wheel
+
+    }
+
+}
+
+
+
+
+
+Slip 30) 
+
+
+
+
+
+
+
+B) Write a VB.NET program to accept the details Supplier (SupId, SupName, Phone
+
+No, Address) store it into the database and display it. 
+
+Imports System.Data.SqlClient
+
+
+
+Public Class Form1
+
+    Private connectionString As String = "Data Source=Your_Server;Initial Catalog=Your_Database;Integrated Security=True"
+
+
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+
+        Dim supId As Integer = Integer.Parse(txtSupId.Text)
+
+        Dim supName As String = txtSupName.Text
+
+        Dim phoneNo As String = txtPhoneNo.Text
+
+        Dim address As String = txtAddress.Text
+
+
+
+        Dim query As String = "INSERT INTO Supplier (SupId, SupName, PhoneNo, Address) VALUES (@SupId, @SupName, @PhoneNo, @Address)"
+
+
+
+        Using connection As New SqlConnection(connectionString)
+
+            Using command As New SqlCommand(query, connection)
+
+                command.Parameters.AddWithValue("@SupId", supId)
+
+                command.Parameters.AddWithValue("@SupName", supName)
+
+                command.Parameters.AddWithValue("@PhoneNo", phoneNo)
+
+                command.Parameters.AddWithValue("@Address", address)
+
+
+
+                connection.Open()
+
+                command.ExecuteNonQuery()
+
+            End Using
+
+        End Using
+
+
+
+        MessageBox.Show("Supplier details saved successfully.")
+
+    End Sub
+
+
+
+    Private Sub btnDisplay_Click(sender As Object, e As EventArgs) Handles btnDisplay.Click
+
+        Dim query As String = "SELECT * FROM Supplier"
+
+
+
+        Using connection As New SqlConnection(connectionString)
+
+            Using command As New SqlCommand(query, connection)
+
+                connection.Open()
+
+
+
+                Using reader As SqlDataReader = command.ExecuteReader()
+
+                    While reader.Read()
+
+                        Dim supId As Integer = Convert.ToInt32(reader("SupId"))
+
+                        Dim supName As String = reader("SupName").ToString()
+
+                        Dim phoneNo As String = reader("PhoneNo").ToString()
+
+                        Dim address As String = reader("Address").ToString()
+
+
+
+                        MessageBox.Show($"Supplier ID: {supId}, Name: {supName}, Phone No: {phoneNo}, Address: {address}")
+
+                    End While
+
+                End Using
+
+            End Using
+
+        End Using
+
+    End Sub
+
+End Class
+
